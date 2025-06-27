@@ -1,4 +1,4 @@
-import { Component, signal, effect } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,15 +14,15 @@ import { Apicalls } from '../services/apicalls';
 })
 export class RecipePage {
   recipe = signal<any>(null);
-  //apirecipe : any;
 
   constructor(private route: ActivatedRoute, private api: Apicalls) {
-    const id = this.route.snapshot.paramMap.get('idCategory');
-    if (id) {
-      this.api.getCategoryById(id).subscribe((category: any) => {
-        this.recipe.set(category);
-        //this.apirecipe = category;
-      });
-    }
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('idCategory');
+      if (id) {
+        this.api.getCategoryById(id).subscribe((category: any) => {
+          this.recipe.set(category);
+        });
+      }
+    });
   }
 }
