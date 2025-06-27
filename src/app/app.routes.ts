@@ -10,8 +10,7 @@ export const routes: Routes = [
     {path:'', component:Home},
     {path:'menu', component:Menu},
     {path:'contact', component:Contact},
-    {path:'recipePage/:idCategory', component:RecipePage},
+    {path:'recipePage/{:idCategory}', component:RecipePage},
     {path:'favorite', component:Favorite},
     {path:'**', component:Page404},
-
 ];
